@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   elevate your content like never before!`,
   creator: 'Joseph Opio',
   keywords:
-    'image converter, video converter, audio converter, unlimited image converter, unlimited video converter',
+    'image converter, video converter, audio converter, unlimited image converter, unlimited video converter, joseph opio converter, video format converter, free online converter',
 };
 
 export default function RootLayout({
