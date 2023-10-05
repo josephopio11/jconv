@@ -27,7 +27,7 @@ export default function Navbar({ }): any {
       </Link>
       <div className="hidden gap-1 md:gap-2 lg:gap-4 md:flex">
         <Button variant="ghost" className="font-semibold text-md">
-          <Link href="https://www.josephopio.com">Home</Link>
+          <Link href="https://www.josephopio.com">Home Page</Link>
         </Button>
         <Link href="/about">
           <Button variant="ghost" className="font-semibold text-md">
@@ -69,7 +69,7 @@ export default function Navbar({ }): any {
                     variant="link"
                     className="w-full font-semibold text-md"
                   >
-                    Home
+                    Home Page
                   </Button>
                 </Link>
                 <Link href="/about">
