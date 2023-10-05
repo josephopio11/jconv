@@ -1,14 +1,14 @@
 export default function About() {
   return (
-    <div className="space-y-12 text-md md:text-lg text-gray-500 pb-4 md:pb-8">
+    <div className="pb-4 space-y-12 text-gray-500 text-md md:text-lg md:pb-8">
       <p>
-        Introducing JConvert, the ultimate multimedia conversion powerhouse that
+        Introducing FreeConverter, the ultimate multimedia conversion powerhouse that
         empowers you to transform images, audio files, and videos with
         unprecedented freedom, all at absolutely no cost! Say goodbye to
         limitations and hello to limitless creative possibilities.
       </p>
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🖼️ Image Conversion:
         </h2>
         <p>
@@ -20,7 +20,7 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🎵 Audio Transformation:
         </h2>
         <p>
@@ -32,7 +32,7 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🎥 Video Metamorphosis:
         </h2>
         <p>
@@ -43,7 +43,7 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🚀 Unlimited Usage, No Strings Attached:
         </h2>
         <p>
@@ -55,18 +55,18 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🌐 Accessible Anywhere:
         </h2>
         <p>
-          Access JConvert from any device with an internet connection. Whether
+          Access FreeConverter from any device with an internet connection. Whether
           you're on your computer, tablet, or smartphone, you can use our
           platform with ease.
         </p>
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           🔒 Secure and Private:
         </h2>
         <p>
@@ -77,7 +77,7 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           💡 User-Friendly Interface:
         </h2>
         <p>
@@ -88,7 +88,7 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
           📈 Constantly Evolving:
         </h2>
         <p>
@@ -99,13 +99,13 @@ export default function About() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl md:text-2xl font-medium text-gray-700">
-          🌟 It's Free, It's Powerful, It's JConvert:
+        <h2 className="text-xl font-medium text-gray-700 md:text-2xl">
+          🌟 It's Free, It's Powerful, It's FreeConverter:
         </h2>
         <p>
           Experience the freedom to convert images, audio, and video without
           boundaries. Elevate your multimedia projects with the unlimited
-          potential of JConvert.
+          potential of FreeConverter.
         </p>
       </div>
 

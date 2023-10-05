@@ -3,17 +3,16 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
-import GA from '@/components/GA';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'JConvert - Free Unlimited File Converter',
-  description: `Unleash your creativity with JConvert – the ultimate online tool for
+  title: 'FreeConverter - Free Unlimited Media Files Converter',
+  description: `Unleash your creativity with FreeConverter – the ultimate online tool for
   unlimited and free multimedia conversion. Transform images, audio, and
   videos effortlessly, without restrictions. Start converting now and
   elevate your content like never before!`,
-  creator: 'SOUHAIL BEN-LHACHEMI',
+  creator: 'Joseph Opio',
   keywords:
     'image converter, video converter, audio converter, unlimited image converter, unlimited video converter',
 };
@@ -25,8 +24,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GA GA_MEASUREMENT_ID='G-52GQ441X7H' />
-      <meta name="google-site-verification" content="V8lmEvFOdYBlChgR6pYABBZBhI1EFnPb1YuxTTdHXMU" />
       <body className={inter.className}>
         <Navbar />
         <Toaster />

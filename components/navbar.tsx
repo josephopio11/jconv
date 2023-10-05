@@ -13,7 +13,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-export default function Navbar({}): any {
+export default function Navbar({ }): any {
   return (
     <nav className="fixed z-50 flex items-center justify-between w-full h-24 px-4 py-10 bg-white backdrop-blur-md bg-opacity-30 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
       <Link href="/">
@@ -43,7 +43,7 @@ export default function Navbar({}): any {
       <Link href="https://github.com/josephopio11/">
         <Button
           variant="default"
-          className="items-center hidden gap-2 bg-orange-600 rounded-full w-fit md:flex"
+          className="items-center hidden gap-2 bg-indigo-500 rounded-full w-fit md:flex"
           size="lg"
         >
           <span>Github Repo</span>
