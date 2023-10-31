@@ -15,17 +15,17 @@ import {
 
 export default function Navbar({ }): any {
   return (
-    <nav className="fixed z-50 flex items-center justify-between w-full h-24 px-4 py-10 bg-white backdrop-blur-md bg-opacity-30 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
+    <nav className="w-full backdrop-blur-md bg-white bg-opacity-30 z-50 fixed h-24 flex justify-between items-center py-10 px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
       <Link href="/">
         <Image
           alt="logo"
-          className="w-40 cursor-pointer"
+          className="cursor-pointer w-40"
           src="/images/logo.svg"
           height={100}
           width={170}
         />
       </Link>
-      <div className="hidden gap-1 md:gap-2 lg:gap-4 md:flex">
+      <div className="gap-1 md:gap-2 lg:gap-4 hidden md:flex">
         <Button variant="ghost" className="font-semibold text-md">
           <Link href="https://www.josephopio.com">Home</Link>
         </Button>
@@ -55,7 +55,7 @@ export default function Navbar({ }): any {
 
       {/* MOBILE NAV */}
       <Sheet>
-        <SheetTrigger className="block p-3 md:hidden">
+        <SheetTrigger className="block md:hidden p-3">
           <span className="text-2xl">
             <GrMenu />
           </span>
@@ -64,10 +64,10 @@ export default function Navbar({ }): any {
           <SheetHeader>
             <SheetDescription>
               <div className="w-full space-y-3">
-                <Link href="https://www.josephopio.com">
+                <Link href="/">
                   <Button
                     variant="link"
-                    className="w-full font-semibold text-md"
+                    className="font-semibold text-md w-full"
                   >
                     Home
                   </Button>
@@ -75,7 +75,7 @@ export default function Navbar({ }): any {
                 <Link href="/about">
                   <Button
                     variant="link"
-                    className="w-full font-semibold text-md"
+                    className="font-semibold text-md w-full"
                   >
                     About
                   </Button>
@@ -83,7 +83,7 @@ export default function Navbar({ }): any {
                 <Link href="/privacy-policy">
                   <Button
                     variant="link"
-                    className="w-full font-semibold text-md"
+                    className="font-semibold text-md w-full"
                   >
                     Privacy Policy
                   </Button>

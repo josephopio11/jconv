@@ -1,69 +1,69 @@
-'use client';
+"use client";
 
 // imports
-import { FiUploadCloud } from 'react-icons/fi';
-import { LuFileSymlink } from 'react-icons/lu';
-import { MdClose } from 'react-icons/md';
-import ReactDropzone from 'react-dropzone';
-import bytesToSize from '@/utils/bytes-to-size';
-import fileToIcon from '@/utils/file-to-icon';
-import { useState, useEffect, useRef } from 'react';
-import { useToast } from '@/components/ui/use-toast';
-import compressFileName from '@/utils/compress-file-name';
-import { Skeleton } from '@/components/ui/skeleton';
-import convertFile from '@/utils/convert';
-import { ImSpinner3 } from 'react-icons/im';
-import { MdDone } from 'react-icons/md';
-import { Badge } from '@/components/ui/badge';
-import { HiOutlineDownload } from 'react-icons/hi';
-import { BiError } from 'react-icons/bi';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { FiUploadCloud } from "react-icons/fi";
+import { LuFileSymlink } from "react-icons/lu";
+import { MdClose } from "react-icons/md";
+import ReactDropzone from "react-dropzone";
+import bytesToSize from "@/utils/bytes-to-size";
+import fileToIcon from "@/utils/file-to-icon";
+import { useState, useEffect, useRef } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import compressFileName from "@/utils/compress-file-name";
+import { Skeleton } from "@/components/ui/skeleton";
+import convertFile from "@/utils/convert";
+import { ImSpinner3 } from "react-icons/im";
+import { MdDone } from "react-icons/md";
+import { Badge } from "@/components/ui/badge";
+import { HiOutlineDownload } from "react-icons/hi";
+import { BiError } from "react-icons/bi";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
-import { Button } from './ui/button';
-import loadFfmpeg from '@/utils/load-ffmpeg';
-import type { Action } from '@/types';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
+} from "./ui/select";
+import { Button } from "./ui/button";
+import loadFfmpeg from "@/utils/load-ffmpeg";
+import type { Action } from "@/types";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 
 const extensions = {
   image: [
-    'jpg',
-    'jpeg',
-    'png',
-    'gif',
-    'bmp',
-    'webp',
-    'ico',
-    'tif',
-    'tiff',
-    'svg',
-    'raw',
-    'tga',
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "bmp",
+    "webp",
+    "ico",
+    "tif",
+    "tiff",
+    "svg",
+    "raw",
+    "tga",
   ],
   video: [
-    'mp4',
-    'm4v',
-    'mp4v',
-    '3gp',
-    '3g2',
-    'avi',
-    'mov',
-    'wmv',
-    'mkv',
-    'flv',
-    'ogv',
-    'webm',
-    'h264',
-    '264',
-    'hevc',
-    '265',
+    "mp4",
+    "m4v",
+    "mp4v",
+    "3gp",
+    "3g2",
+    "avi",
+    "mov",
+    "wmv",
+    "mkv",
+    "flv",
+    "ogv",
+    "webm",
+    "h264",
+    "264",
+    "hevc",
+    "265",
   ],
-  audio: ['mp3', 'wav', 'ogg', 'aac', 'wma', 'flac', 'm4a'],
+  audio: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
 };
 
 export default function Dropzone() {
@@ -77,22 +77,24 @@ export default function Dropzone() {
   const [is_converting, setIsConverting] = useState<boolean>(false);
   const [is_done, setIsDone] = useState<boolean>(false);
   const ffmpegRef = useRef<any>(null);
+  const [defaultValues, setDefaultValues] = useState<string>("video");
+  const [selcted, setSelected] = useState<string>("...");
   const accepted_files = {
-    'image/*': [
-      '.jpg',
-      '.jpeg',
-      '.png',
-      '.gif',
-      '.bmp',
-      '.webp',
-      '.ico',
-      '.tif',
-      '.tiff',
-      '.raw',
-      '.tga',
+    "image/*": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".bmp",
+      ".webp",
+      ".ico",
+      ".tif",
+      ".tiff",
+      ".raw",
+      ".tga",
     ],
-    'audio/*': [],
-    'video/*': [],
+    "audio/*": [],
+    "video/*": [],
   };
 
   // functions
@@ -109,8 +111,8 @@ export default function Dropzone() {
     }
   };
   const download = (action: Action) => {
-    const a = document.createElement('a');
-    a.style.display = 'none';
+    const a = document.createElement("a");
+    a.style.display = "none";
     a.href = action.url;
     a.download = action.output;
 
@@ -134,25 +136,25 @@ export default function Dropzone() {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-              ...elt,
-              is_converted: true,
-              is_converting: false,
-              url,
-              output,
-            }
-            : elt,
+                ...elt,
+                is_converted: true,
+                is_converting: false,
+                url,
+                output,
+              }
+            : elt
         );
         setActions(tmp_actions);
       } catch (err) {
         tmp_actions = tmp_actions.map((elt) =>
           elt === action
             ? {
-              ...elt,
-              is_converted: false,
-              is_converting: false,
-              is_error: true,
-            }
-            : elt,
+                ...elt,
+                is_converted: false,
+                is_converting: false,
+                is_error: true,
+              }
+            : elt
         );
         setActions(tmp_actions);
       }
@@ -169,7 +171,7 @@ export default function Dropzone() {
       tmp.push({
         file_name: file.name,
         file_size: file.size,
-        from: file.name.slice(((file.name.lastIndexOf('.') - 1) >>> 0) + 2),
+        from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
         to: null,
         file_type: file.type,
         file,
@@ -186,7 +188,7 @@ export default function Dropzone() {
     setActions(
       actions.map((action): Action => {
         if (action.file_name === file_name) {
-          console.log('FOUND');
+          console.log("FOUND");
           return {
             ...action,
             to,
@@ -194,7 +196,7 @@ export default function Dropzone() {
         }
 
         return action;
-      }),
+      })
     );
   };
   const checkIsReady = (): void => {
@@ -232,20 +234,20 @@ export default function Dropzone() {
         {actions.map((action: Action, i: any) => (
           <div
             key={i}
-            className="relative flex flex-wrap items-center justify-between w-full px-4 py-4 space-y-2 border cursor-pointer lg:py-0 rounded-xl h-fit lg:h-20 lg:px-10 lg:flex-nowrap"
+            className="w-full py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl border h-fit lg:h-20 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between"
           >
             {!is_loaded && (
-              <Skeleton className="absolute w-full h-full -ml-10 cursor-progress rounded-xl" />
+              <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl" />
             )}
-            <div className="flex items-center gap-4">
+            <div className="flex gap-4 items-center">
               <span className="text-2xl text-orange-600">
                 {fileToIcon(action.file_type)}
               </span>
               <div className="flex items-center gap-1 w-96">
-                <span className="overflow-x-hidden font-medium text-md">
+                <span className="text-md font-medium overflow-x-hidden">
                   {compressFileName(action.file_name)}
                 </span>
-                <span className="text-sm text-gray-400">
+                <span className="text-gray-400 text-sm">
                   ({bytesToSize(action.file_size)})
                 </span>
               </div>
@@ -269,18 +271,25 @@ export default function Dropzone() {
                 </span>
               </Badge>
             ) : (
-              <div className="flex items-center gap-4 text-gray-400 text-md">
+              <div className="text-gray-400 text-md flex items-center gap-4">
                 <span>Convert to</span>
                 <Select
-                  onValueChange={(value) =>
-                    updateAction(action.file_name, value)
-                  }
+                  onValueChange={(value) => {
+                    if (extensions.audio.includes(value)) {
+                      setDefaultValues("audio");
+                    } else if (extensions.video.includes(value)) {
+                      setDefaultValues("video");
+                    }
+                    setSelected(value);
+                    updateAction(action.file_name, value);
+                  }}
+                  value={selcted}
                 >
-                  <SelectTrigger className="w-32 font-medium text-center text-gray-600 outline-none focus:outline-none focus:ring-0 bg-gray-50 text-md">
+                  <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-gray-600 bg-gray-50 text-md font-medium">
                     <SelectValue placeholder="..." />
                   </SelectTrigger>
                   <SelectContent className="h-fit">
-                    {action.file_type.includes('image') && (
+                    {action.file_type.includes("image") && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
                         {extensions.image.map((elt, i) => (
                           <div key={i} className="col-span-1 text-center">
@@ -291,8 +300,8 @@ export default function Dropzone() {
                         ))}
                       </div>
                     )}
-                    {action.file_type.includes('video') && (
-                      <Tabs defaultValue="video" className="w-full">
+                    {action.file_type.includes("video") && (
+                      <Tabs defaultValue={defaultValues} className="w-full">
                         <TabsList className="w-full">
                           <TabsTrigger value="video" className="w-full">
                             Video
@@ -325,7 +334,7 @@ export default function Dropzone() {
                         </TabsContent>
                       </Tabs>
                     )}
-                    {action.file_type.includes('audio') && (
+                    {action.file_type.includes("audio") && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
                         {extensions.audio.map((elt, i) => (
                           <div key={i} className="col-span-1 text-center">
@@ -348,22 +357,22 @@ export default function Dropzone() {
             ) : (
               <span
                 onClick={() => deleteAction(action)}
-                className="flex items-center justify-center w-10 h-10 text-2xl text-gray-400 rounded-full cursor-pointer hover:bg-gray-50"
+                className="cursor-pointer hover:bg-gray-50 rounded-full h-10 w-10 flex items-center justify-center text-2xl text-gray-400"
               >
                 <MdClose />
               </span>
             )}
           </div>
         ))}
-        <div className="flex justify-end w-full">
+        <div className="flex w-full justify-end">
           {is_done ? (
             <div className="space-y-4 w-fit">
               <Button
                 size="lg"
-                className="relative flex items-center w-full gap-2 py-4 font-semibold rounded-xl text-md"
+                className="rounded-xl font-semibold relative py-4 text-md flex gap-2 items-center w-full"
                 onClick={downloadAll}
               >
-                {actions.length > 1 ? 'Download All' : 'Download'}
+                {actions.length > 1 ? "Download All" : "Download"}
                 <HiOutlineDownload />
               </Button>
               <Button
@@ -379,11 +388,11 @@ export default function Dropzone() {
             <Button
               size="lg"
               disabled={!is_ready || is_converting}
-              className="relative flex items-center py-4 font-semibold rounded-xl text-md w-44"
+              className="rounded-xl font-semibold relative py-4 text-md flex items-center w-44"
               onClick={convert}
             >
               {is_converting ? (
-                <span className="text-lg animate-spin">
+                <span className="animate-spin text-lg">
                   <ImSpinner3 />
                 </span>
               ) : (
@@ -405,18 +414,18 @@ export default function Dropzone() {
       onDropRejected={() => {
         handleExitHover();
         toast({
-          variant: 'destructive',
-          title: 'Error uploading your file(s)',
-          description: 'Allowed Files: Audio, Video and Images.',
+          variant: "destructive",
+          title: "Error uploading your file(s)",
+          description: "Allowed Files: Audio, Video and Images.",
           duration: 5000,
         });
       }}
       onError={() => {
         handleExitHover();
         toast({
-          variant: 'destructive',
-          title: 'Error uploading your file(s)',
-          description: 'Allowed Files: Audio, Video and Images.',
+          variant: "destructive",
+          title: "Error uploading your file(s)",
+          description: "Allowed Files: Audio, Video and Images.",
           duration: 5000,
         });
       }}
@@ -424,25 +433,25 @@ export default function Dropzone() {
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps()}
-          className="flex items-center justify-center border-2 border-dashed shadow-sm cursor-pointer  bg-gray-50 h-72 lg:h-80 xl:h-96 rounded-3xl"
+          className=" bg-gray-50 h-72 lg:h-80 xl:h-96 rounded-3xl shadow-sm border-2 border-dashed cursor-pointer flex items-center justify-center"
         >
           <input {...getInputProps()} />
           <div className="space-y-4 text-gray-500">
             {is_hover ? (
               <>
-                <div className="flex justify-center text-6xl">
+                <div className="justify-center flex text-6xl">
                   <LuFileSymlink />
                 </div>
-                <h3 className="text-2xl font-medium text-center">
+                <h3 className="text-center font-medium text-2xl">
                   Yes, right there
                 </h3>
               </>
             ) : (
               <>
-                <div className="flex justify-center text-6xl">
+                <div className="justify-center flex text-6xl">
                   <FiUploadCloud />
                 </div>
-                <h3 className="text-2xl font-medium text-center">
+                <h3 className="text-center font-medium text-2xl">
                   Click, or drop your files here
                 </h3>
               </>
